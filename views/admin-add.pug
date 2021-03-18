@@ -1,0 +1,19 @@
+extends includes/admin-layout
+block content
+  .container(style="width:700px").py-4
+    form(action="/admin/add", method="post") 
+      .row
+        .col-md-6.mb-2
+          input.form-control(type="text" name="title" placeholder="Article title") 
+        .col-md-3.mb-2 
+          input.form-control(type="text" name="author" placeholder="Article author") 
+        .col-lg-3.mb-2
+          select.form-select(name="category") 
+            option(value="esports") Esports 
+            option(value="technology") Technology
+            option(value="science") Science
+            option(value="nature") Nature
+        .col-12.mb-2
+          textarea.form-control(placeholder="Your article's content goes here" name="content" rows="10")
+        .col-12.mb-2  
+          button.btn.btn-secondary.w-100(type="submit") Add article

@@ -1,0 +1,10 @@
+extends includes/layout 
+block content 
+  .hero-article(style=`background:url(/images/hero-${article.category}.jpg)`)
+  .container.py-4
+    h1.mb-4=article.title
+      span.ms-2(style="font-size:0.9rem") by #{article.author || "Author unknown"}
+    p(style="font-size:1.5rem")=article.content
+    .card.bg-transparent.border-1.border-secondary.border-round.w-50
+      .card-body
+        .card-text Created on #{formatedDate} by #{article.author || "Author unknown"} 

@@ -1,0 +1,14 @@
+extends includes/layout 
+include includes/mixins
+
+block content
+  .hero
+  .container.my-4
+    +category-row("E-sports articles:","esports",articles)
+    .line
+    +category-row("Technology articles:","technology",articles)
+    .line
+    +category-row("Science articles:","science",articles)
+    .line
+    +category-row("Nature articles:","nature",articles)
+     
