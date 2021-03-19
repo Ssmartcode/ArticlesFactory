@@ -1,13 +1,15 @@
-mixin admin-bar(show)
-  if show
+mixin admin-bar(role)
+  if role!=="reader"
     nav.navbar.bg-dark.justify-content-center
       .container.display-flex-justify-content-between
         a(href="/" style="font-weight:500").nav-brand.me-auto.text-light Admin panel
         ul.navbar-nav.flex-row
-          li.nav-item
-            a(href="/admin/articles").nav-link.text-light.mx-2 Articles 
+          if role === "admin"
+            li.nav-item
+              a(href="/admin/articles").nav-link.text-light.mx-2 Articles 
           li.nav-item
             a(href="/admin/add").nav-link.text-light.mx-2 Add article
+ 
 
 mixin article(id,title,content,author)
   .col-md-4.my-4
@@ -27,9 +29,9 @@ mixin articles-list(id,title,content,author,category, createdAt)
       |in 
       strong #{category}
   .row.gx-0.mb-3.justify-content-end
-    .col-1.px-0
+    .col-lg-1.px-0
       a(href=`/admin/articles/update/${id}`).btn.btn-success.w-100.rounded-0 Update
-    .col-1.px-0
+    .col-lg-1.px-0
       button(data-id=id).btn-delete.btn.btn-danger.rounded-0.w-100 Delete
 mixin category-row(title,categoryName,articles)
   h2.text-center
@@ -43,3 +45,8 @@ mixin category-row(title,categoryName,articles)
           +article(id,title, content,author)
       if counter>2
         - break
+
+mixin errorMessage(errors)      
+  for error in errors 
+    ul.list-unstyled.alert.alert-danger
+      li.list-item.text-center #{error.msg}

@@ -1,0 +1,4 @@
+ul.messages.list-unstyled.w-50.mx-auto.mt-5.text-center
+  each type in Object.keys(messages)
+    each message in messages[type]
+      li(class=`list-item alert alert-${type}`)=message

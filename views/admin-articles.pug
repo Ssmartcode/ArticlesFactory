@@ -1,7 +1,7 @@
 extends includes/admin-layout
 block content
-  .list-group
-    .container.py-4
+  .container.py-4
+    .list-group
       each article in articles 
         -const {id, title,content, author, category, createdAt} = article;
-          +articles-list(id, title,content,author, category, createdAt)
+        +articles-list(id, title,content,author, category, createdAt)

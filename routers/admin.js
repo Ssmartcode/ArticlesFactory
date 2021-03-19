@@ -1,21 +1,42 @@
 const express = require("express");
-const { findByIdAndRemove } = require("../models/article");
+const { body, validationResult } = require("express-validator");
 
 const router = express.Router();
+
 const Article = require("../models/article");
+
+// FORM VALIDATION
+const addValidation = [
+  body("title")
+    .isLength({ min: 10, max: 100 })
+    .withMessage("Title must be shorter than 100 and longer than 10"),
+  body("content")
+    .isLength({ min: 50 })
+    .withMessage("Content must be longer than 50 "),
+];
 
 router.get("/", (req, res) => {
   res.send(200);
 });
 // ADD
-router.get("/add", (req, res) => {
+router.get("/add", async (req, res) => {
   res.render("admin-add");
 });
-router.post("/add", async (req, res) => {
+router.post("/add", addValidation, async (req, res) => {
   const { title, author, category, content } = req.body;
   const article = new Article({ title, author, category, content });
-  await article.save();
-  res.redirect("/admin/add");
+  const errors = validationResult(req);
+  if (errors.isEmpty())
+    try {
+      await article.save();
+      req.flash("success", "Article has been added");
+      res.redirect("/admin/add");
+    } catch (err) {
+      console.log(err);
+    }
+  else {
+    res.render("admin-add", errors);
+  }
 });
 
 // GET ARTICLES
@@ -31,12 +52,15 @@ router.get("/articles/update/:id", async (req, res) => {
 });
 router.post("/articles/update/:id", async (req, res) => {
   const { title, author, category, content } = req.body;
+
   let article = await Article.findById(req.params.id);
-  article.title = title;
-  article.author = author;
-  article.category = category;
-  article.content = content;
-  await article.save();
+  article = Object.assign(article, { title, author, category, content });
+  try {
+    await article.save();
+    req.flash("success", "Article updated");
+  } catch (err) {
+    console.log(err);
+  }
   res.redirect("/admin/articles");
 });
 // DELETE ARTICLE
