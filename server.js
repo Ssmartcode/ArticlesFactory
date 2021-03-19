@@ -21,7 +21,7 @@ app.set("view engine", "pug");
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
-app.use(express.urlencoded({ useNewUrlParser: true }));
+app.use(express.urlencoded({ useNewUrlParser: true, extended: true }));
 
 const articles = require("./routers/articles");
 const admin = require("./routers/admin");
@@ -31,7 +31,6 @@ app.use("/admin", admin);
 app.get("/", async (req, res) => {
   const Article = require("./models/article");
   const articles = await Article.find();
-  console.log(articles);
   res.render("index", { articles });
 });
 
