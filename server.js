@@ -34,4 +34,4 @@ app.get("/", async (req, res) => {
   res.render("index", { articles });
 });
 
-app.listen(3000, () => console.log("Opened on port 3000"));
+app.listen(process.env.PORT || 3000, () => console.log("Opened on port 3000"));
