@@ -1,6 +1,13 @@
 extends includes/admin-layout
 block content
   .container.py-4
+    .my-3.d-flex
+      a(href="/admin/articles/new").ascending.me-3
+        i.fas.fa-arrow-up.me-1
+        |Order by newest
+      a(href="/admin/articles/old").descending.me-3 
+        i.fas.fa-arrow-down.me-1
+        |Order by oldest
     .list-group
       each article in articles 
         -const {id, title,content, author, category, createdAt} = article;

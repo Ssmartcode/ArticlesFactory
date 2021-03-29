@@ -6,22 +6,26 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous")
     link(rel="stylesheet", href="/css/style.css")
-    title News Website
+    title 
   body 
     if user
       +admin-bar(user.role)
-    nav.navbar.navbar-expand-lg.navbar-light.bg-transparent   
+    nav.main-nav.navbar.navbar-expand-lg.navbar-light.sticky-top  
       .container
-        a.navbar-brand(href='/') FlashNews
+        a.navbar-brand(href='/') Articles
+          span.text-primary Factory 
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
           span.navbar-toggler-icon
         #navbarNav.collapse.navbar-collapse.justify-content-end
           ul.navbar-nav
             li.nav-item
-              a.nav-link.active(aria-current='page' href='/') Home
+              a.nav-link(href='/') Home
             if user
               li.nav-item
                 a.nav-link(href='/user/logout') Logout
+              if user.role ==="admin" || user.role === "author"
+                li.nav-item
+                  a.nav-link(href='/admin/add') Admin
             else
               li.nav-item
                 a.nav-link(href='/user/login') Login
@@ -30,13 +34,13 @@ html(lang="en")
                 | Categories
               ul.dropdown-menu(aria-labelledby='navbarDropdown')
                 li
-                  a.dropdown-item(href='/articles/esports') E-sports
+                  a.dropdown-item(href='/articles/entertainment') Entertainment
                 li
                   a.dropdown-item(href='/articles/technology') Technology
                 li
-                  a.dropdown-item(href='/articles/science') Science
+                  a.dropdown-item(href='/articles/health') Health
                 li
-                  a.dropdown-item(href='/articles/nature') Nature
+                  a.dropdown-item(href='/articles/family') Family
             
 
     != messages("includes/flash-message",locals)

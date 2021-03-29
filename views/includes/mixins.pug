@@ -1,29 +1,54 @@
+//- ADMIN BAR
 mixin admin-bar(role)
   if role!=="reader"
-    nav.navbar.bg-dark.justify-content-center
+    nav.admin-navbar.navbar.justify-content-center.bg-dark.p-1
       .container.display-flex-justify-content-between
         a(href="/" style="font-weight:500").nav-brand.me-auto.text-light Admin panel
         ul.navbar-nav.flex-row
-          if role === "admin"
-            li.nav-item
-              a(href="/admin/articles").nav-link.text-light.mx-2 Articles 
+          li.nav-item
+            a(href="/admin/articles/new ").nav-link.text-light.mx-2 Articles 
           li.nav-item
             a(href="/admin/add").nav-link.text-light.mx-2 Add article
- 
+          
 
-mixin article(id,title,content,author)
+//- ARTICLE CARD BOX
+mixin article(id,title,content,author,category, createdAt, imagePath)
   .col-md-4.my-4
-    .card.article-card(style="background:#ccc; color:#333" data-id=id)
-      .card-body 
-        h3.card-title.mb-1=title 
+    .card.article-card.bg-transparent.border-0(data-id=id)
+      img.card-img-top.w-100(src=`/uploads/${imagePath}`, alt="image of article")
+      .card-header.p-0.pt-1.border-0.bg-transparent 
+        strong.text-primary #{category.charAt(0).toUpperCase() + category.slice(1)}
+      .card-body.px-0.py-1
+        h4.card-title.mb-1=title 
         .text-mute.text-secondary.mb-2 by #{author}
-        p.card-text #{content.slice(0,100)}...
+        .card-text 
+          !=content
+
+//- HOME PAGE CATEGORY ROW
+mixin category-row(title,categoryName,articles)
+  h2.text-center
+    a.link-item.text-dark(href=`/articles/${categoryName}`)=title
+  .row
+    -let counter = 0
+    each article in articles
+      -const {id, title,content, author,category, createdAt, imagePath} = article;
+      if category === categoryName
+        -counter=counter+1
+        +article(id,title, content,author,category, createdAt, imagePath)
+      if categoryName === "all"
+        -counter=counter+1
+        +article(id,title, content,author,category, createdAt, imagePath)
+      if counter>2
+        - break
+
+//- LIST OF ARTICLES FOR ADMIN PAGE
 mixin articles-list(id,title,content,author,category, createdAt)
   .list-group-item
     .d-flex.w-100.justify-content-between
       h5.mb-1=title
       small=createdAt
-    p.mb-1 #{content.slice(0,200)}...
+    .article-text.mb-1.article-list--
+      !=content
     small 
       i #{author} 
       |in 
@@ -33,19 +58,8 @@ mixin articles-list(id,title,content,author,category, createdAt)
       a(href=`/admin/articles/update/${id}`).btn.btn-success.w-100.rounded-0 Update
     .col-lg-1.px-0
       button(data-id=id).btn-delete.btn.btn-danger.rounded-0.w-100 Delete
-mixin category-row(title,categoryName,articles)
-  h2.text-center
-    a.link-item.text-secondary(href=`/articles/${categoryName}`)=title
-  .row
-    -let counter = 0
-    each article in articles
-      -const {id, title,content, author,category} = article;
-      if category === categoryName
-          -counter=counter+1
-          +article(id,title, content,author)
-      if counter>2
-        - break
 
+//- ERROR MESSAGES
 mixin errorMessage(errors)      
   for error in errors 
     ul.list-unstyled.alert.alert-danger

@@ -7,17 +7,19 @@ block content
     h2.text-center.mb-4 Register an account:
     form(action=`/user/register`, method="post") 
       .row
-        .col-12
+        .col-12.mb-1
           input.form-control(type="text" name="userName" placeholder="User Name") 
-        .col-12
+        .col-12.mb-1
           input.form-control(type="text" name="fullName" placeholder="Your Full Name") 
-        .col-12
+        .col-12.mb-1
           input.form-control(type="password" name="password" placeholder="Password" )
-        .col-12
-          select.form-select(name="role")
-            option(value="reader") Reader
-            option(value="author") Author 
-            option(value="admin") Admin  
-        .col-12 
+        .col-12.mb-1
+          .input-group
+            select#roleSelect.form-select(name="role")
+              option(value="reader") Reader
+              option(value="author") Author 
+              option.disable(value="admin") Admin  
+            label(for="roleSelect").input-group-text User role 
+        .col-12.mb-1
           button.btn.btn-primary.w-100(type="submit") Register
       

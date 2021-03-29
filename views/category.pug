@@ -2,9 +2,12 @@ extends includes/layout
 include includes/mixins
 
 block content 
-  .hero-category(style=`background:url(/images/hero-${category}.jpg)`)
-  .container.my-4
+  .hero-category(style=`background:url(/images/hero-${category}.jpg) rgba(0,0,0,0.5);`)
+    .container.h-100.d-flex.flex-column.justify-content-center.align-items-center
+      h1.text-light #{category.slice(0,1).toUpperCase() + category.slice(1)} articles
+    
+  .container.my-5
     .row
       each article in articles
-        -const {id, title,content, author} = article;
-        +article(id,title,content,author)
+        -const {id, title,content, author,category, imagePath,createdAt} = article;
+        +article(id,title,content,author,category, createdAt, imagePath)

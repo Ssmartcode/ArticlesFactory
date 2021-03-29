@@ -3,18 +3,21 @@ block content
   .container(style="max-width:700px").py-4
     if errors
       +errorMessage(errors)
-    form(action="/admin/add", method="post") 
+    form(action="/admin/add", method="post" enctype="multipart/form-data") 
       .row
         .col-md-6.mb-2
           input.form-control(type="text" name="title" placeholder="Article title") 
-        .col-md-3.mb-2 
+        .col-md-6.mb-2 
           input.form-control(type="text" name="author" placeholder="Article author") 
-        .col-lg-3.mb-2
+        .col-lg-6.mb-2
           select.form-select(name="category") 
-            option(value="esports") Esports 
+            option(value="entertainment") Entertainment
             option(value="technology") Technology
-            option(value="science") Science
-            option(value="nature") Nature
+            option(value="health") Health
+            option(value="family") Family
+        .col-lg-6.mb-2
+          label.form-label.d-none(for="image")
+          input#image.form-control(type="file" name="image" accept=".jpg,.jpeg")
         .col-12.mb-2
           textarea.form-control(placeholder="Your article's content goes here" name="content" rows="10")
         .col-12.mb-2  

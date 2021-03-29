@@ -3,9 +3,8 @@ const moment = require("moment");
 
 const router = express.Router();
 const Article = require("../models/article");
-
-router.get("/", (req, res) => {
-  res.send("hello there");
+router.get("/all", (req, res) => {
+  res.redirect("/");
 });
 router.get("/article/:id", async (req, res) => {
   const id = req.params.id;
@@ -15,20 +14,20 @@ router.get("/article/:id", async (req, res) => {
   console.log(formatedDate);
   res.render("article", { article, formatedDate });
 });
-router.get("/esports", async (req, res) => {
-  const articles = await Article.find({ category: "esports" });
-  res.render("category", { articles, category: "esports" });
+router.get("/entertainment", async (req, res) => {
+  const articles = await Article.find({ category: "entertainment" });
+  res.render("category", { articles, category: "entertainment" });
 });
 router.get("/technology", async (req, res) => {
   const articles = await Article.find({ category: "technology" });
   res.render("category", { articles, category: "technology" });
 });
-router.get("/science", async (req, res) => {
-  const articles = await Article.find({ category: "science" });
-  res.render("category", { articles, category: "science" });
+router.get("/health", async (req, res) => {
+  const articles = await Article.find({ category: "health" });
+  res.render("category", { articles, category: "health" });
 });
-router.get("/nature", async (req, res) => {
-  const articles = await Article.find({ category: "nature" });
-  res.render("category", { articles, category: "nature" });
+router.get("/family", async (req, res) => {
+  const articles = await Article.find({ category: "family" });
+  res.render("category", { articles, category: "family" });
 });
 module.exports = router;

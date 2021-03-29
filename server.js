@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -24,15 +25,12 @@ app.use(function (req, res, next) {
 });
 
 // CONNECT TO DB
-mongoose.connect(
-  "mongodb+srv://andrei-admin:MamaTata@2@cluster0.zapps.mongodb.net/portofolioDB?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.DB_CONNECTION, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 db.once("open", () => console.log("Connected to the data base"));
 db.on("error", (err) => console.log(err));
@@ -42,7 +40,7 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "pug");
 
 // STATIC FILES
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ useNewUrlParser: true, extended: true }));
 
@@ -66,6 +64,12 @@ app.use("/user", user);
 app.get("/", async (req, res) => {
   const Article = require("./models/article");
   const articles = await Article.find();
+
+  // filter articles from newest to oldest
+  articles.sort(
+    (article1, article2) => article2.createdAt - article1.createdAt
+  );
+
   res.render("index", { articles });
 });
 

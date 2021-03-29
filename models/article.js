@@ -6,6 +6,8 @@ const articleSchema = mongoose.Schema(
     title: { type: String, required: true },
     author: { type: String, required: false },
     content: { type: String, required: true },
+    imagePath: { type: String, required: true },
+    createdBy: { type: String, required: true },
   },
   { timestamps: true }
 );

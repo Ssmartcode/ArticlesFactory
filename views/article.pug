@@ -1,10 +1,14 @@
 extends includes/layout 
 block content 
-  .hero-article(style=`background:url(/images/hero-${article.category}.jpg)`)
-  .container.py-4
-    h1.mb-4=article.title
+  .hero-article(style=`background:url(/images/hero-${article.category}.jpg) rgba(0,0,0,0.4)`)
+    .container.h-100.d-flex.flex-column.justify-content-center.align-items-center
+      h1.text-light.text-center=article.title
+  .container.py-5.article-container
+    h1.article-title.mb-5.text-center=article.title
       span.ms-2(style="font-size:0.9rem") by #{article.author || "Author unknown"}
-    p(style="font-size:1.5rem")=article.content
-    .card.bg-transparent.border-1.border-secondary.border-round.w-50
+    .img.text-center
+      img.mb-5(src=`/uploads/${article.imagePath}` alt="article image" style="max-width:700px; max-height:700px;")
+    !=article.content
+    .card.bg-transparent.border-1.border-primary.border-round.col-lg-6.mt-4 
       .card-body
-        .card-text Created on #{formatedDate} by #{article.author || "Author unknown"} 
+        .card-text Created on #{formatedDate} by #{article.author || "Author unknown"}

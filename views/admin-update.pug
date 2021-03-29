@@ -1,20 +1,24 @@
 extends includes/admin-layout 
 block content
   .container(style="width:700px").py-4
-    -const{id,title,content,author,category} = article
-        form(action=`/admin/articles/update/${id}`, method="post") 
+    -const{id,title,content,author,category} = article;
+        form(action=`/admin/articles/update/${id}`, method="post" enctype="multipart/form-data") 
           .row
             .col-md-6.mb-2
               input.form-control(type="text" name="title" value=title) 
-            .col-md-3.mb-2 
+            .col-md-6.mb-2 
               input.form-control(type="text" name="author" value=author) 
-            .col-lg-3.mb-2
-              select.form-select(name="category" value=category) 
-                option(value="esports") Esports 
-                option(value="technology") Technology
-                option(value="science") Science
-                option(value="nature") Nature
+            .col-lg-6.mb-2
+              select.form-select(name="category") 
+                option(value="entertainment" selected = category == "entertainment") Entertainment 
+                option(value="technology" selected = category == "technology") Technology
+                option(value="health" selected = category == "health") Health
+                option(value="family" selected = category == "family") Family
+            .col-lg-6.mb-2
+              label.form-label.d-none(for="image")
+              input#image.form-control(type="file" name="image" accept=".jpg,.jpeg")
             .col-12.mb-2
               textarea.form-control(name="content" rows="10")=content
             .col-12.mb-2  
               button.btn.btn-success.w-100(type="submit") Update article
+              

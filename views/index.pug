@@ -3,12 +3,17 @@ include includes/mixins
 
 block content
   .hero
-  .container.my-4
-    +category-row("E-sports articles:","esports",articles)
+    .container.h-100.d-flex.flex-column.justify-content-center.align-items-start
+      h1.text-light Entertainment, Technology, Health and Family
+      p.text-light All your favorite articles in one place. Create an account if you want to become an author
+  .container.my-5
+    +category-row("Most recent articles:","all",articles)
     .line
-    +category-row("Technology articles:","technology",articles)
+    +category-row("Recent Entertainment articles:","entertainment",articles)
     .line
-    +category-row("Science articles:","science",articles)
+    +category-row("Recent Technology articles:","technology",articles)
     .line
-    +category-row("Nature articles:","nature",articles)
+    +category-row("Recent Health articles:","health",articles)
+    .line
+    +category-row("Recent Family articles:","family",articles)
      
