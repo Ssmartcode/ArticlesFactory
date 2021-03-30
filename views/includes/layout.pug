@@ -41,8 +41,8 @@ html(lang="en")
             if user
               li.nav-item
                 a.nav-link(href='/user/logout') 
-                i.fas.fa-sign-out-alt.text-dark.me-2
-                |Logout
+                  i.fas.fa-sign-out-alt.text-dark.me-2
+                  |Logout
               if user.role ==="admin" || user.role === "author"
                 li.nav-item
                   a.nav-link(href='/admin/add') Admin

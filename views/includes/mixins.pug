@@ -12,9 +12,9 @@ mixin admin-bar(role)
           
 
 //- ARTICLE CARD BOX
-mixin article(id,title,content,author,category,createdAt,imagePath,premium)
+mixin article(id,title,content,author,category,createdAt,imagePath)
   .col-md-4.my-4
-    .card.article-card.bg-transparent.border-0(class=`${premium && !user ? "premium" :""}` data-id=id)
+    .card.article-card.bg-transparent.border-0(class=`${category === "family" && !user ? "premium" :""}` data-id=id)
       img.card-img-top.w-100(src=`/uploads/${imagePath}`, alt="image of article")
       .card-header.p-0.pt-1.border-0.bg-transparent 
         strong.text-primary #{category.charAt(0).toUpperCase() + category.slice(1)}
@@ -25,7 +25,7 @@ mixin article(id,title,content,author,category,createdAt,imagePath,premium)
           !=content
 
 //- HOME PAGE CATEGORY ROW
-mixin category-row(title,categoryName,premium,articles)
+mixin category-row(title,categoryName,articles)
   h2.text-center
     a.link-item.text-dark(href=`/articles/${categoryName}`)=title
   .row

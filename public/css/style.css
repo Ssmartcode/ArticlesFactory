@@ -5,17 +5,11 @@ body {
 }
 
 body {
-  background: -webkit-gradient(linear, left top, right top, from(#f1f1f1), to(#b4b4b4));
-  background: linear-gradient(to right, #f1f1f1, #b4b4b4);
+  background: -webkit-gradient(linear, left top, right top, from(#f1f1f1), to(#d9d9d9));
+  background: linear-gradient(to right, #f1f1f1, #d9d9d9);
   color: #333;
   font-family: "Roboto", sans-serif !important;
   font-weight: 300;
-}
-
-nav {
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
-  font-weight: 400;
 }
 
 a {
@@ -27,12 +21,23 @@ textarea {
   width: 100%;
 }
 
+nav {
+  background: #f4f4f4;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
 nav.admin-navbar {
   background: #333;
 }
 
 p {
   margin: 0;
+}
+
+.container-850 {
+  max-width: 850;
+  margin: 0 auto;
 }
 
 .line {
@@ -60,9 +65,42 @@ p {
 }
 
 .premium {
+  position: relative;
   pointer-events: none;
   cursor: none;
-  opacity: 0.7;
+}
+
+.premium::before {
+  content: "";
+  position: absolute;
+  background: rgba(100, 100, 100, 0.1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.premium::after {
+  content: "Premium";
+  color: #f4f4f4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 3.2rem;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }
 
 .alert, .alert-error {

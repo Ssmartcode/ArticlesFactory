@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Della+Respira&family=Roboto:wght@300;400&display=swap");
 
-$background: linear-gradient(to right, #f1f1f1, #b4b4b4);
+$background: linear-gradient(to right, #f1f1f1, #d9d9d9);
 html,
 body {
   min-height: 100%;
@@ -11,17 +11,19 @@ body {
   font-family: "Roboto", sans-serif !important;
   font-weight: 300;
 }
-nav {
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
-  font-weight: 400;
-}
+
 a {
   text-decoration: none !important;
 }
 textarea {
   resize: none;
   width: 100%;
+}
+// main nav
+nav {
+  background: #f4f4f4;
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 // admin-nav
 nav.admin-navbar {
@@ -31,6 +33,10 @@ p {
   margin: 0;
 }
 // UTILITIES
+.container-850 {
+  max-width: 850;
+  margin: 0 auto;
+}
 .line {
   width: 100%;
   height: 1px;
@@ -56,9 +62,34 @@ p {
 }
 // disable premium articles
 .premium {
+  position: relative;
   pointer-events: none;
   cursor: none;
-  opacity: 0.7;
+  // overflow: hidden;
+}
+.premium::before {
+  content: "";
+  position: absolute;
+  background: rgba(100, 100, 100, 0.1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.premium::after {
+  content: "Premium";
+  color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
 }
 //Class to send errors/warnings(login)
 .alert {
