@@ -126,7 +126,7 @@ router.get("/articles/:sort", async (req, res) => {
 // UPDATE ARTICLES
 router.get("/articles/update/:id", async (req, res) => {
   const article = await Article.findById(req.params.id);
-  if (article.createdBy !== req.user.userName) {
+  if (article.createdBy !== req.user.userName && req.user.role !== "admin") {
     req.flash("warning", "You dont own this article");
     res.redirect("/admin/articles/new");
   } else res.render("admin-update", { article });

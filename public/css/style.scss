@@ -12,8 +12,7 @@ body {
   font-weight: 300;
 }
 nav {
-  background: $background;
-  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
   font-weight: 400;
 }
@@ -31,12 +30,59 @@ nav.admin-navbar {
 p {
   margin: 0;
 }
+// UTILITIES
+.line {
+  width: 100%;
+  height: 1px;
+  background: rgba(92, 91, 91, 0.4);
+  margin-bottom: 3rem;
+}
+.card {
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+.card-img-top {
+  height: 300px;
+  object-fit: cover;
+}
+.ascending,
+.descending {
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+}
+// disable premium articles
+.premium {
+  pointer-events: none;
+  cursor: none;
+  opacity: 0.7;
+}
+//Class to send errors/warnings(login)
+.alert {
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.alert-error {
+  @extend .alert;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
 
 // Logo
 .navbar-brand {
   font-family: "Della Respira", serif;
   font-size: 1.6rem;
+  span {
+    background: #0d6efd;
+  }
 }
+// main navigaion
 .main-nav {
   a.nav-link {
     &:hover {
@@ -45,6 +91,8 @@ p {
     }
   }
 }
+
+// ---HERO
 .hero {
   background: url("../images/hero.jpg") rgba(0, 0, 0, 0.4);
   background-position: center !important;
@@ -68,6 +116,8 @@ p {
 .hero-article {
   background-attachment: fixed !important;
 }
+
+// --- ARTICLE PAGE
 .article-container {
   h1,
   h2,
@@ -89,6 +139,7 @@ p {
   }
 }
 
+// ARTICLE CARD
 .article-card {
   .card-body {
     .card-text {
@@ -120,34 +171,5 @@ p {
         font-weight: 500 !important;
       }
     }
-  }
-}
-.line {
-  width: 100%;
-  height: 1px;
-  background: rgba(92, 91, 91, 0.4);
-  margin-bottom: 3rem;
-}
-
-.card {
-  &:hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.7);
-  }
-}
-.card-img-top {
-  height: 300px;
-  object-fit: cover;
-}
-.alert-error {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
-}
-.ascending,
-.descending {
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
   }
 }

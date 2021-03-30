@@ -21,8 +21,13 @@ const userValidation = [
 ];
 
 const alreadyUser = async (userName) => {
-  const dbUser = await User.findOne({ userName: userName });
-  if (dbUser) return true;
+  try {
+    const dbUser = await User.findOne({ userName: userName });
+    if (dbUser) return true;
+  } catch (err) {
+    req.flash("danger", err.message);
+    req.redirect("/user/login");
+  }
   return false;
 };
 
@@ -40,13 +45,26 @@ router.post("/register", userValidation, async (req, res) => {
   }
 
   let user = new User();
-  user = Object.assign(user, { userName, fullName, password, role });
+  if (role === "admin")
+    user = Object.assign(user, {
+      userName,
+      fullName,
+      password,
+      role: "author",
+      adminRequest: true,
+    });
+  else user = Object.assign(user, { userName, fullName, password, role });
 
   const errors = await validationResult(req);
   if (errors.isEmpty())
     try {
       user.password = await bcrypt.hash(user.password, 10);
       await user.save();
+      if (user.adminRequest)
+        req.flash(
+          "warning",
+          "Your account has author role untill you get approval"
+        );
       req.flash("success", "Account has been created, you can login now");
       res.redirect("/user/login");
     } catch (err) {
@@ -58,10 +76,10 @@ router.post("/register", userValidation, async (req, res) => {
 });
 
 // USERR LOGIN
-router.get("/login", async (req, res) => {
+router.get("/login", (req, res) => {
   res.render("user-login");
 });
-router.post("/login", async (req, res, next) => {
+router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/user/login",

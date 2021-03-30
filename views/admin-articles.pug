@@ -8,6 +8,8 @@ block content
       a(href="/admin/articles/old").descending.me-3 
         i.fas.fa-arrow-down.me-1
         |Order by oldest
+    if !articles.length
+      .alert.alert-warning.text-center This account has no articles published. If you want to edit other articles you need an admin account
     .list-group
       each article in articles 
         -const {id, title,content, author, category, createdAt} = article;
