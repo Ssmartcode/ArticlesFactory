@@ -90,6 +90,6 @@ router.post("/login", (req, res, next) => {
 // USER LOGOUT
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/user/login");
+  res.redirect("/");
 });
 module.exports = router;

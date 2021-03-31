@@ -5,7 +5,9 @@ block content
   .hero
     .container.h-100.d-flex.flex-column.justify-content-center.align-items-start
       h1.text-light Entertainment, Technology, Health and Family
-      p.text-light All your favorite articles in one place. Create an account if you want to become an author
+      p.mb-2.text-light All your favorite articles in one place. 
+        a(href="/user/login").text-primary Create an account 
+        |if you want to become an author
   .container.my-5
     +category-row("Most recent articles:","all",articles)
     .line

@@ -1,4 +1,5 @@
 extends includes/layout 
+include includes/mixins
 block content 
   .hero-article(style=`background:url(/images/hero-${article.category}.jpg) rgba(0,0,0,0.4)`)
     .container.h-100.d-flex.flex-column.justify-content-center.align-items-center
@@ -8,7 +9,8 @@ block content
       span.ms-2(style="font-size:0.9rem") by #{article.author || "Author unknown"}
     .img.text-center
       img.mb-5.rounded-1.border(src=`/uploads/${article.imagePath}` alt="article image" style="max-width:700px; max-height:700px;")
-    .container-850
+    .container-850.position-relative
+      +sidebar(categoryArticles)
       !=article.content
       .card(style="cursor:initial").bg-transparent.border-1.border-primary.border-round.col-lg-6.mt-4 
         .card-body

@@ -1,6 +1,37 @@
 const cardText = document.querySelectorAll(".article-card .card-text");
 const articleText = document.querySelectorAll(".list-group-item .article-text");
+const sideBarItems = document.querySelectorAll(
+  ".list-group-item side-bar-item"
+);
+const scrollingLimit = document.body.scrollHeight - window.innerHeight;
 
+if (window.location.pathname.includes("/articles/article")) {
+  // get elements
+  const progressBar = document.querySelector("progress");
+  const articleContainer = document.querySelector(".container-850");
+  const sideBar = document.querySelector(".sidebar");
+  const navBar = document.querySelector(".main-nav");
+
+  // get distance from top of page
+  navBarHeight = navBar.offsetHeight;
+  console.log(articleContainer.o);
+  //show progressbar and set the limit
+  progressBar.classList.remove("hidden");
+  progressBar.max = scrollingLimit;
+
+  // observer for container
+
+  document.addEventListener("scroll", (_) => {
+    containerTop =
+      articleContainer.getBoundingClientRect().top + window.scrollY;
+    if (window.scrollY + navBarHeight >= containerTop)
+      sideBar.classList.add("display-sidebar");
+    else sideBar.classList.remove("display-sidebar");
+    progressBar.value = window.scrollY;
+  });
+}
+
+// cut text
 const formatText = (element, characters) => {
   element.forEach((text) => {
     // text will be cut after  100 letters

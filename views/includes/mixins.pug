@@ -40,7 +40,7 @@ mixin category-row(title,categoryName,articles)
         +article(id,title, content,author,category, createdAt, imagePath, premium)
       if counter>2
         - break
-
+  
 //- LIST OF ARTICLES FOR ADMIN PAGE
 mixin articles-list(id,title,content,author,category, createdAt)
   .list-group-item
@@ -58,6 +58,16 @@ mixin articles-list(id,title,content,author,category, createdAt)
       a(href=`/admin/articles/update/${id}`).btn.btn-success.w-100.rounded-0 Update
     .col-lg-1.px-0
       button(data-id=id).btn-delete.btn.btn-danger.rounded-0.w-100 Delete
+//- SIDE BAR
+mixin sidebar(articles)
+  .sidebar.container-300.hidden-sidebar
+    h1.text-center Related Articles
+    .ul.list-group.list-group-flush.rounded-1
+      for article in articles   
+        li.list-group-item.side-bar-item
+          a(href=`/articles/article/${article.id}`).link-item.text-dark=article.title
+          i.d-block.text-secondary by #{article.author} in 
+            i.text-primary=article.category    
 
 //- ERROR MESSAGES
 mixin errorMessage(errors)      

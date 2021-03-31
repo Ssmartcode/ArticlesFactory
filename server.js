@@ -5,6 +5,8 @@ const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
 
+const sortFromRecent = require("./config/sorting");
+
 const app = express();
 
 // SESSION
@@ -63,13 +65,10 @@ app.use("/user", user);
 
 app.get("/", async (req, res) => {
   const Article = require("./models/article");
-  const articles = await Article.find();
+  let articles = await Article.find();
 
   // filter articles from newest to oldest
-  articles.sort(
-    (article1, article2) => article2.createdAt - article1.createdAt
-  );
-
+  articles = sortFromRecent(articles);
   res.render("index", { articles });
 });
 

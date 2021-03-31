@@ -2,26 +2,34 @@ const express = require("express");
 const { flash } = require("express-flash-message");
 const moment = require("moment");
 
-const router = express.Router();
+const sortFromRecent = require("../config/sorting");
 const Article = require("../models/article");
-router.get("/all", (req, res) => {
-  res.redirect("/");
+
+const router = express.Router();
+router.get("/all", async (req, res) => {
+  let articles = await Article.find();
+  articles = sortFromRecent(articles);
+  res.render("category", { articles, category: "all" });
 });
 router.get("/entertainment", async (req, res) => {
-  const articles = await Article.find({ category: "entertainment" });
+  let articles = await Article.find({ category: "entertainment" });
+  articles = sortFromRecent(articles);
   res.render("category", { articles, category: "entertainment" });
 });
 router.get("/technology", async (req, res) => {
-  const articles = await Article.find({ category: "technology" });
+  let articles = await Article.find({ category: "technology" });
+  articles = sortFromRecent(articles);
   res.render("category", { articles, category: "technology" });
 });
 router.get("/health", async (req, res) => {
-  const articles = await Article.find({ category: "health" });
+  let articles = await Article.find({ category: "health" });
+  articles = sortFromRecent(articles);
   res.render("category", { articles, category: "health" });
 });
 router.get("/family", async (req, res) => {
   if (req.isAuthenticated()) {
-    const articles = await Article.find({ category: "family" });
+    let articles = await Article.find({ category: "family" });
+    articles = sortFromRecent(articles);
     res.render("category", { articles, category: "family" });
   } else {
     req.flash("warning", "You need an account to access these articles.");
@@ -34,14 +42,16 @@ router.get("/article/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const article = await Article.findById(id);
-    // Redirect if anonym user tries to access a premium article
+    const categoryArticles = await Article.find({ category: article.category });
+
+    // Redirect if visitors try to access a premium article
     if (article.category === "family" && !req.isAuthenticated()) {
       req.flash("warning", "You need an account to read this article");
       res.redirect("/user/login");
     } else {
       const date = new Date(article.createdAt);
       const formatedDate = moment(date).format("DD/MM/YYYY-hh:mm:ss a");
-      res.render("article", { article, formatedDate });
+      res.render("article", { article, categoryArticles, formatedDate });
     }
   } catch (err) {
     req.flash("danger", err.message);

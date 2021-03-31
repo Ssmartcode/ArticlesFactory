@@ -32,16 +32,39 @@ nav.admin-navbar {
 p {
   margin: 0;
 }
+#page-scroll {
+  height: 5px;
+  color: #0d6efd;
+}
 // UTILITIES
+.container-300 {
+  max-width: 300;
+}
 .container-850 {
   max-width: 850;
   margin: 0 auto;
 }
+.hidden {
+  visibility: hidden;
+}
+
 .line {
   width: 100%;
   height: 1px;
   background: rgba(92, 91, 91, 0.4);
   margin-bottom: 3rem;
+}
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  transition: all 0.3s;
+  top: 100px;
+  right: 30px;
+}
+.display-sidebar {
+  opacity: 1;
 }
 .card {
   &:hover {

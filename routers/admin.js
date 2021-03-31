@@ -6,6 +6,7 @@ const { v4 } = require("uuid");
 const router = express.Router();
 
 const Article = require("../models/article");
+const sortFromRecent = require("../config/sorting");
 const { request } = require("https");
 
 // Check if user is authenticated
