@@ -72,4 +72,9 @@ app.get("/", async (req, res) => {
   res.render("index", { articles });
 });
 
+app.use((req, res, next) => {
+  res
+    .status(404)
+    .render("page404", { error: "The page has not been found", message: "" });
+});
 app.listen(process.env.PORT || 3000, () => console.log("Opened on port 3000"));

@@ -44,6 +44,7 @@ router.get("/article/:id", async (req, res) => {
     const article = await Article.findById(id);
     const categoryArticles = await Article.find({ category: article.category });
 
+    if (!article) return res.render("page404");
     // Redirect if visitors try to access a premium article
     if (article.category === "family" && !req.isAuthenticated()) {
       req.flash("warning", "You need an account to read this article");
@@ -54,8 +55,7 @@ router.get("/article/:id", async (req, res) => {
       res.render("article", { article, categoryArticles, formatedDate });
     }
   } catch (err) {
-    req.flash("danger", err.message);
-    res.redirect("/");
+    res.status(404).render("page404", { error: "Could not find this article" });
   }
 });
 
