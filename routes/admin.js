@@ -1,13 +1,10 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
 const { body, validationResult } = require("express-validator");
 const { v4 } = require("uuid");
 const router = express.Router();
 
 const Article = require("../models/article");
-const sortFromRecent = require("../config/sorting");
-const { request } = require("https");
 
 // Check if user is authenticated
 router.use((req, res, next) => {
@@ -58,12 +55,17 @@ const updateValidation = [
     .withMessage("Your file must be an image"),
 ];
 // MULTER MIDDLEWARE
-var storage = multer.diskStorage({
+const fileMimTypes = {
+  "image/png": "png",
+  "image/jpg": "jpg",
+  "image/jpeg": "jpeg",
+};
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, v4() + ".jpg");
+    cb(null, v4() + "." + fileMimTypes[file.mimetype]);
   },
 });
 const upload = multer({

@@ -8,7 +8,7 @@ block content
     h1.article-title.mb-5.text-center=article.title
       span.ms-2(style="font-size:0.9rem") by #{article.author || "Author unknown"}
     .img.text-center
-      img.mb-5.rounded-1.border(src=`/uploads/${article.imagePath}` alt="article image" style="max-width:700px; max-height:700px;")
+      img.mb-5.rounded-1.border(src=`/uploads/${article.imagePath}` alt="article image" )
     .container-850.position-relative
       +sidebar(categoryArticles)
       !=article.content

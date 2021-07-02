@@ -1,5 +1,4 @@
 const express = require("express");
-const { flash } = require("express-flash-message");
 const moment = require("moment");
 
 const sortFromRecent = require("../config/sorting");

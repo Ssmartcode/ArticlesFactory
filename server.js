@@ -56,9 +56,9 @@ app.get("*", (req, res, next) => {
   next();
 });
 // ROUTES
-const articles = require("./routers/articles");
-const admin = require("./routers/admin");
-const user = require("./routers/user");
+const articles = require("./routes/articles");
+const admin = require("./routes/admin");
+const user = require("./routes/user");
 app.use("/articles", articles);
 app.use("/admin", admin);
 app.use("/user", user);
@@ -77,4 +77,4 @@ app.use((req, res, next) => {
     .status(404)
     .render("page404", { error: "The page has not been found", message: "" });
 });
-app.listen(process.env.PORT || 3000, () => console.log("Opened on port 3000"));
+app.listen(process.env.PORT || 3001, () => console.log("Opened on port 3000"));

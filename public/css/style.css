@@ -5,7 +5,6 @@ body {
 }
 
 body {
-  background: -webkit-gradient(linear, left top, right top, from(#f1f1f1), to(#d9d9d9));
   background: linear-gradient(to right, #f1f1f1, #d9d9d9);
   color: #333;
   font-family: "Roboto", sans-serif !important;
@@ -65,7 +64,6 @@ p {
   right: 0;
   top: 0;
   opacity: 0;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   top: 100px;
   right: 30px;
@@ -82,8 +80,7 @@ p {
 
 .card-img-top {
   height: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .ascending:hover,
@@ -111,15 +108,9 @@ p {
 .premium::after {
   content: "Premium";
   color: #f4f4f4;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 3.2rem;
   font-weight: 500;
   position: absolute;
@@ -127,11 +118,11 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
-.alert, .alert-error {
+.alert,
+.alert-error {
   padding: 1rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
@@ -148,7 +139,6 @@ p {
   font-family: "Della Respira", serif;
   font-size: 1.6rem;
 }
-
 .navbar-brand span {
   background: #0d6efd;
 }
@@ -158,7 +148,8 @@ p {
   color: #f4f4f4 !important;
 }
 
-.hero, .hero-article,
+.hero,
+.hero-article,
 .hero-category {
   background: url("../images/hero.jpg") rgba(0, 0, 0, 0.4);
   background-position: center !important;
@@ -167,13 +158,15 @@ p {
   font-weight: 400;
   height: 95vh;
 }
-
-.hero h1, .hero-article h1, .hero-category h1 {
+.hero h1,
+.hero-article h1,
+.hero-category h1 {
   font-family: "Della Respira", serif;
   font-size: 3.5rem;
 }
-
-.hero p, .hero-article p, .hero-category p {
+.hero p,
+.hero-article p,
+.hero-category p {
   font-size: 1.5rem;
 }
 
@@ -192,7 +185,6 @@ p {
 .article-container h4 {
   font-size: 1.4rem;
 }
-
 .article-container p,
 .article-container span {
   font-size: 1.2rem !important;
@@ -202,11 +194,13 @@ p {
   color: #333 !important;
   font-family: inherit !important;
 }
-
 .article-container .article-title {
   font-size: 2.5rem;
 }
-
+.article-container img {
+  width: 500px;
+  height: 500px;
+}
 .article-card .card-body .card-text h1,
 .article-card .card-body .card-text h2,
 .article-card .card-body .card-text h3,
@@ -226,7 +220,6 @@ p {
   color: #333 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
-
 .article-card .card-body .card-text h1,
 .article-card .card-body .card-text h2,
 .article-card .card-body .card-text h3,
@@ -235,4 +228,32 @@ p {
 .article-card .card-body .card-text h6 {
   font-weight: 500 !important;
 }
+
+@media screen and (max-width: 1550px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero-article,
+  .hero-category,
+  .hero {
+    height: 70%;
+  }
+  .hero-article h1,
+  .hero-category h1,
+  .hero h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .hero p {
+    font-size: 1.3rem;
+  }
+  .article-container img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
