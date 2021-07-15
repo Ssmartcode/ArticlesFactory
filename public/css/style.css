@@ -199,8 +199,9 @@ p {
 }
 .article-container img {
   width: 500px;
-  height: 500px;
+  height: 400px;
 }
+
 .article-card .card-body .card-text h1,
 .article-card .card-body .card-text h2,
 .article-card .card-body .card-text h3,
