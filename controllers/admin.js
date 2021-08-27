@@ -1,4 +1,5 @@
 const Article = require("../models/article");
+const { validationResult } = require("express-validator");
 
 const addAdminGET = async (req, res) => {
   res.render("admin-add");

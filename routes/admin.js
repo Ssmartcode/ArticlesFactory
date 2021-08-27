@@ -12,7 +12,7 @@ const {
 } = require("../controllers/admin");
 
 const multer = require("multer");
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const { v4 } = require("uuid");
 
 // Check if user is authenticated
